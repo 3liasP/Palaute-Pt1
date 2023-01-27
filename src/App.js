@@ -1,25 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
 
-function App() {
+const Statistics = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {props.name} {props.value}
     </div>
-  );
+  )
 }
 
-export default App;
+const Overall = (props) => {
+  let all = props.good + props.neutral + props.bad 
+  let g = props.good
+  let n = props.neutral * 0
+  let b = props.bad * (-1)
+
+  let average = (g+n+b)/all
+  let positive = g / all
+
+  return (
+    <div>
+      <div>
+        average: {average}
+      </div>
+      <div>
+      positive: {positive} %
+      </div>
+    </div>
+
+  )
+}
+
+const App = () => {
+  // tallenna napit omaan tilaansa
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
+    <div>
+      <h1> give feedback </h1>
+        <button onClick={() => setGood(good + 1)}>
+          good
+        </button>
+        <button onClick={() => setNeutral(neutral + 1)}>
+          neutral
+        </button>
+        <button onClick={() => setBad(bad + 1)}>
+          bad
+        </button>
+      <h1> statistics </h1>
+        <Statistics name="good" value={good} />
+        <Statistics name="neutral" value={neutral} />
+        <Statistics name="bad" value={bad} />
+        <Overall good={good} neutral={neutral} bad={bad} />
+    </div>
+  )
+}
+
+export default App
