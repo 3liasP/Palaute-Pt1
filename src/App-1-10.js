@@ -24,43 +24,40 @@ const Statistics = (props) => {
     )
   }
 }
-
+// Tässä toteutuksessa else if -rakenne, mutta App.js hyödyntää
+// tehokkaampaa case-rakennetta.
 const StatisticLine = (props) => {
   const text = props.text
-
-  switch(text) {
-    case "good":
-      return (
-        <div>
-        good {props.value}
-        </div>
-      )
-    case "neutral":
-      return (
-        <div>
-        neutral {props.value}
-        </div>
-      )
-    case "bad":
-      return (
-        <div>
-          bad {props.value}
-        </div>
-      )
-    case "average":
-      return(
-        <div>
-          average {props.value}
-        </div>
-      )
-    case "positive":
-      return(
-        <div>
-          positive {props.value}%
-        </div>
-      )
-    default:
-      // do nothing
+  if (text === "good"){
+    return (
+      <div>
+      good {props.value}
+      </div>
+    )
+  } else if (text === "neutral") {
+    return (
+      <div>
+      neutral {props.value}
+      </div>
+    )
+  } else if (text === "bad") {
+    return (
+      <div>
+      bad {props.value}
+      </div>
+    )
+  } else if (text === "average") {
+    return(
+      <div>
+      average {props.value}
+      </div>
+    )
+  } else if (text === "positive") {
+    return (
+      <div>
+      positive {props.value} %
+      </div>
+    )
   }
 
 }
